@@ -1,0 +1,23 @@
+doctype html
+html#ng-app(ng-app="app", ng-strict-di)
+<!--[if lt IE 7]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="myApp" class="no-js">
+<!--<![endif]-->
+head
+    title My App
+    script(src='js/lib-script.js')
+    script(src='js/app-script.js')
+    link(rel='stylesheet', href='css/lib-css.css')
+    link(rel='stylesheet', href='css/app-css.css')
+body(ng-app="app", ng-controller="appController")
+    block content
+

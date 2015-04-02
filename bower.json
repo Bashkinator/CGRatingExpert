@@ -1,0 +1,14 @@
+{
+  "name": "CGRatingExpert",
+  "description": "Website that allows you to determine the age rating for your computer game.",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Bashkinator/CGRatingExpert",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "1.2.x",
+    "angular-loader": "1.2.x",
+    "angular-mocks": "~1.2.x",
+    "html5-boilerplate": "~4.3.0"
+  }
+}

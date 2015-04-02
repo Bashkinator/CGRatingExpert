@@ -1,0 +1,10 @@
+/* app css stylesheet */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@import "../../HelloWorld/view/styles/helloworld";
+@import "../../Lenna/view/styles/lenna";
+@import "../../EnvStrings/view/styles/envstrings";
