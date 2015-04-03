@@ -1,2 +1,2 @@
-# Angular skeleton
-Skeleton for angular web-app with grunt, bower, jade, sass, karma and protractor
+# CGRatingExpert
+Website that allows you to determine the age rating for your computer game

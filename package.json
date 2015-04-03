@@ -1,9 +1,9 @@
 {
-  "name": "AngularSkeleton",
+  "name": "CGRatingExpert",
   "private": true,
-  "version": "0.0.1",
-  "description": "Skeleton for angular web-app with grunt, bower, jade, sass, karma and protractor.",
-  "repository": "",
+  "version": "0.0.0",
+  "description": "Website that allows you to determine the age rating for your computer game",
+  "repository": "https://github.com/Bashkinator/CGRatingExpert",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.3.1",
