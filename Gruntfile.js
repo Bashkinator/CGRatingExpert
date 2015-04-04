@@ -17,7 +17,8 @@ module.exports = function(grunt) {
         styles: 'dist/css',
         scripts: 'dist/js',
         fonts: 'dist/fonts',
-        images: 'dist/img'
+        images: 'dist/img',
+        templates: 'dist/templates'
     };
 
     var lib_path = 'bower_components';
@@ -35,6 +36,9 @@ module.exports = function(grunt) {
         },
         jade: {
             mainViews: [app_paths.mainView],
+            templates: [
+                app_paths.root + '/Answer-tpl/view/answer-tpl.jade'
+            ],
             all: [app_paths.root + '/**/*.jade']
         },
         js: {
@@ -192,6 +196,23 @@ module.exports = function(grunt) {
             debug: {
                 src: paths.jade.mainViews,
                 dest: dist_path.root,
+                options: {
+                    client: false,
+                    runtime: false,
+                    pretty: true
+                }
+            },
+            productionTemplates: {
+                src: paths.jade.templates,
+                dest: dist_path.templates,
+                options: {
+                    client: false,
+                    runtime: false
+                }
+            },
+            debugTemplates: {
+                src: paths.jade.templates,
+                dest: dist_path.templates,
                 options: {
                     client: false,
                     runtime: false,
@@ -379,7 +400,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('build:debug:images', ['copy:img']);
 
-    grunt.registerTask('build:debug:html', ['jade:debug']);
+    grunt.registerTask('build:debug:html', ['jade:debug', 'jade:debugTemplates']);
 
     grunt.registerTask('build:production:config', ['merge-json:prod', 'readConfigJSON', 'ngconstant:prod']);
     grunt.registerTask('build:production:sources:lib', ['ngAnnotate:libSrc', 'uglify:libSrc', 'concat:libSrcMin']);
@@ -393,7 +414,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('build:production:images', ['copy:img']);
 
-    grunt.registerTask('build:production:html', ['jade:production']);
+    grunt.registerTask('build:production:html', ['jade:production', 'jade:productionTemplates']);
 
     grunt.registerTask('build:debug', 'Concat files to public directory',
         ['clean', 'build:debug:config', 'build:debug:sources', 'build:debug:styles', 'build:debug:images', 'build:debug:html', 'clean:temp']);

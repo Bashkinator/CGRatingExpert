@@ -6,11 +6,17 @@ var questionService = angular.module('questionService', []);
 questionService.factory('QuestionService', function(Config) {
     var QuestionService = {};
 
-    QuestionService.questions = Config.questions;
+    QuestionService.questions = JSON.parse(JSON.stringify(Config.questions)); // clone
 
-    QuestionService.answers = Config.answers;
+    QuestionService.answers = JSON.parse(JSON.stringify(Config.answers)); // clone
 
     QuestionService.facts = [];
+
+    QuestionService.clear = function() {
+        QuestionService.questions = JSON.parse(JSON.stringify(Config.questions)); // clone
+        QuestionService.answers = JSON.parse(JSON.stringify(Config.answers)); // clone
+        QuestionService.facts = [];
+    };
 
     QuestionService.isQuestionAvailable = function(question) {
         return question.conditions.every(function(condition) {

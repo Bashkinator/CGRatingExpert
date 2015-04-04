@@ -6,6 +6,7 @@ var app = angular.module('app', [
     /* Controllers */
     'appController',
     'questionController',
+    'answerModalController',
     /* Services */
     'questionService',
     /* External components */

@@ -9,4 +9,22 @@ questionController.controller('questionController', function($scope, $modal, Que
 
     $scope.questionFilter = QuestionService.isQuestionAvailable;
 
+    $scope.$watch('QuestionService.answer', function(newAnswer) {
+        if (newAnswer) {
+            $modal.open({
+                templateUrl: '/templates/answer-tpl.html',
+                controller: 'answerModalController',
+                resolve: {
+                    answer: function () {
+                        return newAnswer;
+                    }
+                }
+            }).result.then(function() {
+                    QuestionService.clear();
+            }, function() {
+                    QuestionService.clear();
+            });
+        }
+    });
+
 });
