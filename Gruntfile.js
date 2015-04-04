@@ -16,6 +16,7 @@ module.exports = function(grunt) {
         root: 'dist',
         styles: 'dist/css',
         scripts: 'dist/js',
+        fonts: 'dist/fonts',
         images: 'dist/img'
     };
 
@@ -26,15 +27,26 @@ module.exports = function(grunt) {
     var temp_path = '.tmp';
 
     var paths = {
-        jade: [app_paths.mainView],
+        fonts: {
+            app: [app_paths.root + '/**/fonts/*.*'],
+            lib: [
+                lib_path+ '/bootstrap/fonts/*.*'
+            ]
+        },
+        jade: {
+            mainViews: [app_paths.mainView],
+            all: [app_paths.root + '/**/*.jade']
+        },
         js: {
             lib: {
                 src: [
-                    lib_path + '/angular/angular.js'
+                    lib_path + '/angular/angular.js',
+                    lib_path + '/angular-bootstrap/ui-bootstrap-tpls.js'
                 ],
                 min: [
                     temp_path + '/lib-minified.js',
-                    lib_path + '/angular/angular.min.js'
+                    lib_path + '/angular/angular.min.js',
+                    lib_path + '/angular-bootstrap/ui-bootstrap-tpls.min.js'
                 ],
                 to_min: []
             },
@@ -43,12 +55,18 @@ module.exports = function(grunt) {
                 app_paths.root + '/**/*.js'
             ]
         },
-        sass: [app_paths.mainStyle],
+        sass: {
+            mainStyles: [app_paths.mainStyle],
+            all: [app_paths.root + '/**/*.scss']
+        },
         css: {
             lib: {
-                src: [],
+                src: [
+                    lib_path + '/bootstrap/dist/css/bootstrap.css'
+                ],
                 min: [
-                    temp_path+'/lib-minified.css'
+                    temp_path+'/lib-minified.css',
+                    lib_path + '/bootstrap/dist/css/bootstrap.min.css'
                 ],
                 to_min: []
             }
@@ -87,6 +105,12 @@ module.exports = function(grunt) {
                 flatten: true,
                 src: paths.img,
                 dest: dist_path.images
+            },
+            fonts: {
+                expand: true,
+                flatten: true,
+                src: paths.fonts.app.concat(paths.fonts.lib),
+                dest: dist_path.fonts
             }
         },
 
@@ -158,7 +182,7 @@ module.exports = function(grunt) {
 
         jade: {
             production: {
-                src: paths.jade,
+                src: paths.jade.mainViews,
                 dest: dist_path.root,
                 options: {
                     client: false,
@@ -166,7 +190,7 @@ module.exports = function(grunt) {
                 }
             },
             debug: {
-                src: paths.jade,
+                src: paths.jade.mainViews,
                 dest: dist_path.root,
                 options: {
                     client: false,
@@ -205,18 +229,18 @@ module.exports = function(grunt) {
 
             libCSS: {
                 src: paths.css.lib.src,
-                dest: dist_path.styles+'/lib-css.js'
+                dest: dist_path.styles+'/lib-css.css'
             },
             libCSSMin: {
                 src: paths.css.lib.min,
-                dest: dist_path.styles+'/lib-css.js'
+                dest: dist_path.styles+'/lib-css.css'
             }
 
         },
 
         sass: {
             dist: {
-                src: paths.sass,
+                src: paths.sass.mainStyles,
                 dest: temp_path+'/app-css.css'
             }
         },
@@ -253,11 +277,11 @@ module.exports = function(grunt) {
                 tasks: ['build:debug:config', 'build:debug:sources:app', 'clean:temp']
             },
             views: {
-                files: paths.jade,
+                files: paths.jade.all,
                 tasks: ['build:debug:html', 'clean:temp']
             },
             styles: {
-                files: paths.sass,
+                files: paths.sass.mainStyles,
                 tasks: ['build:debug:styles', 'clean:temp']
             }
         },
@@ -350,7 +374,8 @@ module.exports = function(grunt) {
 
     grunt.registerTask('build:debug:styles:lib', ['concat:libCSS']);
     grunt.registerTask('build:debug:styles:app', ['sass:dist', 'autoprefixer:appCSS']);
-    grunt.registerTask('build:debug:styles', ['build:debug:styles:lib', 'build:debug:styles:app']);
+    grunt.registerTask('build:debug:styles:fonts', ['copy:fonts']);
+    grunt.registerTask('build:debug:styles', ['build:debug:styles:lib', 'build:debug:styles:app', 'build:debug:styles:fonts']);
 
     grunt.registerTask('build:debug:images', ['copy:img']);
 
@@ -363,7 +388,8 @@ module.exports = function(grunt) {
 
     grunt.registerTask('build:production:styles:lib', ['cssmin:lib', 'concat:libCSSMin']);
     grunt.registerTask('build:production:styles:app', ['sass:dist', 'autoprefixer:appCSS', 'cssmin:app']);
-    grunt.registerTask('build:production:styles', ['build:production:styles:lib', 'build:production:styles:app']);
+    grunt.registerTask('build:production:styles:fonts', ['copy:fonts']);
+    grunt.registerTask('build:production:styles', ['build:production:styles:lib', 'build:production:styles:app', 'build:production:styles:fonts']);
 
     grunt.registerTask('build:production:images', ['copy:img']);
 

@@ -13,11 +13,13 @@ html#ng-app(ng-app="app", ng-strict-di)
 <html lang="en" ng-app="myApp" class="no-js">
 <!--<![endif]-->
 head
-    title My App
+    title Computer Games Rating Expert
     script(src='js/lib-script.js')
     script(src='js/app-script.js')
     link(rel='stylesheet', href='css/lib-css.css')
     link(rel='stylesheet', href='css/app-css.css')
-body(ng-app="app", ng-controller="appController")
+body.fill(ng-app="app", ng-controller="appController")
+    header
+        p#title.h1.text-center Computer Games Rating Expert
     block content
 

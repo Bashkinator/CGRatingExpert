@@ -6,5 +6,7 @@ var app = angular.module('app', [
     /* Controllers */
     'appController',
     'lennaController',
-    'envStringsController'
+    'envStringsController',
+    /* External components */
+    'ui.bootstrap'
 ]);

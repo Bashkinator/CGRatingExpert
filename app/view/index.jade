@@ -1,5 +1,14 @@
 extends layout
 block content
-    include ../Lenna/view/Lenna
-    include ../HelloWorld/view/HelloWorld
-    include ../EnvStrings/view/EnvStrings
+    main
+        carousel(interval="0")
+            slide
+                p Slide one
+                include ../Lenna/view/Lenna
+                include ../HelloWorld/view/HelloWorld
+                include ../EnvStrings/view/EnvStrings
+            slide
+                p Slide 2
+                include ../Lenna/view/Lenna
+                include ../HelloWorld/view/HelloWorld
+                include ../EnvStrings/view/EnvStrings
