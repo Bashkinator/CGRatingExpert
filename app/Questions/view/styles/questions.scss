@@ -1,0 +1,11 @@
+main > #question-slides {
+  min-width: 100%;
+
+  .carousel {
+    min-height: 50px;
+
+    .carousel-indicators {
+      display: none;
+    }
+  }
+}

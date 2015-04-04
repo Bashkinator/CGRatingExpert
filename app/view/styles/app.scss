@@ -9,6 +9,9 @@ html, body {
   height: 100%;
 }
 
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+
 #title {
   margin-top: 0;
   padding-top: 20px;
@@ -19,12 +22,6 @@ main {
   height: calc(100% - 69px);
   display: flex;
   align-items: center;
-
-  .carousel {
-    min-width: 100%;
-  }
 }
 
-@import "../../HelloWorld/view/styles/helloworld";
-@import "../../Lenna/view/styles/lenna";
-@import "../../EnvStrings/view/styles/envstrings";
+@import "../../Questions/view/styles/questions";

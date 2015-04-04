@@ -1,9 +1,0 @@
-#hello {
-  color: red;
-  font-size: 25pt;
-}
-
-#hello-angular {
-  @extend #hello;
-  color: darkgreen;
-}

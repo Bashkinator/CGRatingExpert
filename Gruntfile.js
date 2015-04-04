@@ -281,7 +281,7 @@ module.exports = function(grunt) {
                 tasks: ['build:debug:html', 'clean:temp']
             },
             styles: {
-                files: paths.sass.mainStyles,
+                files: paths.sass.all,
                 tasks: ['build:debug:styles', 'clean:temp']
             }
         },

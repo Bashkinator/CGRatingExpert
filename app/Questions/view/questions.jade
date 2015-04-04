@@ -1,0 +1,10 @@
+#question-slides(ng-controller="questionController")
+    carousel(interval="0")
+        slide(ng-repeat="question in QuestionService.questions | filter:questionFilter", active="question.active")
+            p {{ question.text }}
+            btn-group.btn-group-vertical.multiple-options-group(ng-if="question.type == 'MultipleAnswers'")
+                button.btn.btn-default(ng-repeat="option in question.options", ng-change="QuestionService.chooseOption(question, option)",
+                                        ng-model="option.isChosen", btn-checkbox) {{ option.text }}
+            btn-group.btn-group-vertical.one-option-group(ng-if="question.type == 'OneAnswer'")
+                button.btn.btn-default(ng-repeat="option in question.options", ng-change="QuestionService.chooseOption(question, option)",
+                                        ng-model="question.chosenOption", btn-radio="option") {{ option.text }}
