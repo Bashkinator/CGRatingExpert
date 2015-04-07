@@ -5,7 +5,8 @@ main > #question-slides {
     min-height: 50px;
 
     .carousel-indicators {
-      top: 125%;
+      position: absolute;
+      bottom: -50px;
       li {
         background-color: darkgray;
       }

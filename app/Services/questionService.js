@@ -26,19 +26,6 @@ questionService.factory('QuestionService', function(Config) {
         });
     };
 
-    QuestionService.isQuestionAnswered = function(question) {
-        switch(question.type) {
-            case "OneAnswer":
-                return (typeof question.chosenOption != 'undefined');
-                break;
-            case "MultipleAnswers":
-                return question.options.some(function(option) {
-                    return option.isChosen;
-                });
-                break;
-        }
-    };
-
     QuestionService.chooseOption = function(question, option) {
         switch(question.type) {
             case "OneAnswer":
