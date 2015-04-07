@@ -5,7 +5,10 @@ main > #question-slides {
     min-height: 50px;
 
     .carousel-indicators {
-      display: none;
+      top: 125%;
+      li {
+        background-color: darkgray;
+      }
     }
   }
 }

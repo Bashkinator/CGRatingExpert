@@ -6,15 +6,15 @@ var questionService = angular.module('questionService', []);
 questionService.factory('QuestionService', function(Config) {
     var QuestionService = {};
 
-    QuestionService.questions = JSON.parse(JSON.stringify(Config.questions)); // clone
+    QuestionService.questions = angular.copy(Config.questions);
 
-    QuestionService.answers = JSON.parse(JSON.stringify(Config.answers)); // clone
+    QuestionService.answers = angular.copy(Config.answers);
 
     QuestionService.facts = [];
 
     QuestionService.clear = function() {
-        QuestionService.questions = JSON.parse(JSON.stringify(Config.questions)); // clone
-        QuestionService.answers = JSON.parse(JSON.stringify(Config.answers)); // clone
+        QuestionService.questions = angular.copy(Config.questions);
+        QuestionService.answers = angular.copy(Config.answers);
         QuestionService.facts = [];
     };
 

@@ -1,6 +1,6 @@
 #question-slides(ng-controller="questionController")
     carousel(interval="0")
-        slide(ng-repeat="question in QuestionService.questions | filter:questionFilter", active="question.active")
+        slide(ng-repeat="question in QuestionService.questions | filter:questionFilter", index="$index", active="question.active")
             p {{ question.text }}
             btn-group.btn-group-vertical.multiple-options-group(ng-if="question.type == 'MultipleAnswers'")
                 button.btn.btn-default(ng-repeat="option in question.options", ng-change="QuestionService.chooseOption(question, option)",

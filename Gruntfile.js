@@ -45,12 +45,14 @@ module.exports = function(grunt) {
             lib: {
                 src: [
                     lib_path + '/angular/angular.js',
-                    lib_path + '/angular-bootstrap/ui-bootstrap-tpls.js'
+                    lib_path + '/angular-animate/angular-animate.js',
+                    'lib/ui-bootstrap-custom-tpls-0.13.0-SNAPSHOT.js',
                 ],
                 min: [
                     temp_path + '/lib-minified.js',
                     lib_path + '/angular/angular.min.js',
-                    lib_path + '/angular-bootstrap/ui-bootstrap-tpls.min.js'
+                    lib_path + '/angular-animate/angular-animate.min.js',
+                    'lib/ui-bootstrap-custom-tpls-0.13.0-SNAPSHOT.min.js'
                 ],
                 to_min: []
             },

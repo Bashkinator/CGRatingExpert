@@ -10,5 +10,6 @@ var app = angular.module('app', [
     /* Services */
     'questionService',
     /* External components */
+    'ngAnimate',
     'ui.bootstrap'
 ]);
