@@ -6,22 +6,37 @@ var questionService = angular.module('questionService', []);
 questionService.factory('QuestionService', function(Config) {
     var QuestionService = {};
 
-    QuestionService.questions = angular.copy(Config.questions);
-
-    QuestionService.answers = angular.copy(Config.answers);
-
-    QuestionService.facts = [];
-
     QuestionService.clear = function() {
         QuestionService.questions = angular.copy(Config.questions);
         QuestionService.answers = angular.copy(Config.answers);
         QuestionService.facts = [];
+        QuestionService.questions.forEach(function(question) {
+            question.options.forEach(function(option) {
+                if (option.no && QuestionService.facts.indexOf(option.no) == -1)
+                    QuestionService.facts.push(option.no);
+            });
+        });
     };
+
+    QuestionService.clear();
 
     QuestionService.isQuestionAvailable = function(question) {
         return question.conditions.every(function(condition) {
             return QuestionService.facts.indexOf(condition) != -1;
         });
+    };
+
+    QuestionService.isQuestionAnswered = function(question) {
+        switch(question.type) {
+            case "OneAnswer":
+                return (typeof question.chosenOption != 'undefined');
+                break;
+            case "MultipleAnswers":
+                return question.options.some(function(option) {
+                    return option.isChosen;
+                });
+                break;
+        }
     };
 
     QuestionService.chooseOption = function(question, option) {

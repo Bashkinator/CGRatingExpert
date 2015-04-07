@@ -79,9 +79,13 @@ module.exports = function(grunt) {
         },
         img: [app_paths.root + '/**/img/*.*'],
         config: {
-            dev: [config_path + '/devConfig.json'],
-            prod: [config_path + '/prodConfig.json'],
-            common: [config_path + '/commonConfig.json']
+            dev: [],
+            prod: [],
+            common: [
+                config_path + '/commonConfig.json',
+                config_path + '/answers.json',
+                config_path + '/questions.json'
+            ]
         }
     };
 
