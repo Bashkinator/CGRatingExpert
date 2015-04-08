@@ -355,10 +355,11 @@ module.exports = function(grunt) {
 
         'jsdoc-ng' : {
             'all' : {
-                src: paths.js.app.concat(['README.md']),
+                src: paths.js.app,
                 dest: 'docs',
                 template : 'jsdoc-ng',
                 options: {
+                    "encoding": "utf8"
                 }
             }
         }
