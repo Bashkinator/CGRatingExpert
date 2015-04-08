@@ -355,12 +355,9 @@ module.exports = function(grunt) {
 
         'jsdoc-ng' : {
             'all' : {
-                src: paths.js.app,
+                src: ['lib/blank.js'].concat(paths.js.app),
                 dest: 'docs',
-                template : 'jsdoc-ng',
-                options: {
-                    "encoding": "utf8"
-                }
+                template : 'jsdoc-ng'
             }
         }
 
@@ -433,7 +430,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('docs', ['jsdoc-ng:all']);
 
-    grunt.registerTask('unit-test', ['karma:unit']);
+    grunt.registerTask('unit-test', ['build:debug:config', 'karma:unit', 'clean:temp']);
 
     grunt.registerTask('e2e-test', ['http-server:devBackground', 'protractor:e2e']);
 
