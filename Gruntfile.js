@@ -12,13 +12,13 @@ module.exports = function(grunt) {
         e2e: 'tests/e2e'
     };
 
-    var dist_path = {
-        root: 'dist',
-        styles: 'dist/css',
-        scripts: 'dist/js',
-        fonts: 'dist/fonts',
-        images: 'dist/img',
-        templates: 'dist/templates'
+    var build_path = {
+        root: 'build',
+        styles: 'build/css',
+        scripts: 'build/js',
+        fonts: 'build/fonts',
+        images: 'build/img',
+        templates: 'build/templates'
     };
 
     var lib_path = 'bower_components';
@@ -31,7 +31,7 @@ module.exports = function(grunt) {
         fonts: {
             app: [app_paths.root + '/**/fonts/*.*'],
             lib: [
-                lib_path+ '/bootstrap/fonts/*.*'
+                lib_path+ '/bootstrap/dist/fonts/*.*'
             ]
         },
         jade: {
@@ -46,7 +46,7 @@ module.exports = function(grunt) {
                 src: [
                     lib_path + '/angular/angular.js',
                     lib_path + '/angular-animate/angular-animate.js',
-                    'lib/ui-bootstrap-custom-tpls-0.13.0-SNAPSHOT.js',
+                    'lib/ui-bootstrap-custom-tpls-0.13.0-SNAPSHOT.js'
                 ],
                 min: [
                     temp_path + '/lib-minified.js',
@@ -101,11 +101,11 @@ module.exports = function(grunt) {
                 },
                 src: [temp_path+'/**/*.*']
             },
-            dist: {
+            build: {
                 options: {
                     force: true
                 },
-                src: [dist_path.root+'/**/*.*']
+                src: [build_path.root+'/**/*.*']
             }
         },
 
@@ -114,13 +114,13 @@ module.exports = function(grunt) {
                 expand: true,
                 flatten: true,
                 src: paths.img,
-                dest: dist_path.images
+                dest: build_path.images
             },
             fonts: {
                 expand: true,
                 flatten: true,
                 src: paths.fonts.app.concat(paths.fonts.lib),
-                dest: dist_path.fonts
+                dest: build_path.fonts
             }
         },
 
@@ -182,7 +182,7 @@ module.exports = function(grunt) {
         uglify: {
             appSrc: {
                 src: temp_path+'/app-script.js',
-                dest: dist_path.scripts+'/app-script.js'
+                dest: build_path.scripts+'/app-script.js'
             },
             libSrc: {
                 src: temp_path+'/lib-annotated.js',
@@ -193,7 +193,7 @@ module.exports = function(grunt) {
         jade: {
             production: {
                 src: paths.jade.mainViews,
-                dest: dist_path.root,
+                dest: build_path.root,
                 options: {
                     client: false,
                     runtime: false
@@ -201,7 +201,7 @@ module.exports = function(grunt) {
             },
             debug: {
                 src: paths.jade.mainViews,
-                dest: dist_path.root,
+                dest: build_path.root,
                 options: {
                     client: false,
                     runtime: false,
@@ -210,7 +210,7 @@ module.exports = function(grunt) {
             },
             productionTemplates: {
                 src: paths.jade.templates,
-                dest: dist_path.templates,
+                dest: build_path.templates,
                 options: {
                     client: false,
                     runtime: false
@@ -218,7 +218,7 @@ module.exports = function(grunt) {
             },
             debugTemplates: {
                 src: paths.jade.templates,
-                dest: dist_path.templates,
+                dest: build_path.templates,
                 options: {
                     client: false,
                     runtime: false,
@@ -234,7 +234,7 @@ module.exports = function(grunt) {
                     banner: "'use strict';\n\n"
                 },
                 src: paths.js.app,
-                dest: dist_path.scripts+'/app-script.js'
+                dest: build_path.scripts+'/app-script.js'
             },
 
             addUseStrict: {
@@ -247,26 +247,26 @@ module.exports = function(grunt) {
 
             libSrc: {
                 src: paths.js.lib.src,
-                dest: dist_path.scripts+'/lib-script.js'
+                dest: build_path.scripts+'/lib-script.js'
             },
             libSrcMin: {
                 src: paths.js.lib.min,
-                dest: dist_path.scripts+'/lib-script.js'
+                dest: build_path.scripts+'/lib-script.js'
             },
 
             libCSS: {
                 src: paths.css.lib.src,
-                dest: dist_path.styles+'/lib-css.css'
+                dest: build_path.styles+'/lib-css.css'
             },
             libCSSMin: {
                 src: paths.css.lib.min,
-                dest: dist_path.styles+'/lib-css.css'
+                dest: build_path.styles+'/lib-css.css'
             }
 
         },
 
         sass: {
-            dist: {
+            build: {
                 src: paths.sass.mainStyles,
                 dest: temp_path+'/app-css.css'
             }
@@ -275,7 +275,7 @@ module.exports = function(grunt) {
         autoprefixer: {
             appCSS: {
                 src: temp_path+'/app-css.css',
-                dest: dist_path.styles+'/app-css.css'
+                dest: build_path.styles+'/app-css.css'
             }
         },
 
@@ -285,8 +285,8 @@ module.exports = function(grunt) {
                 roundingPrecision: -1
             },
             app: {
-                src: dist_path.styles+'/app-css.css',
-                dest: dist_path.styles+'/app-css.css'
+                src: build_path.styles+'/app-css.css',
+                dest: build_path.styles+'/app-css.css'
             },
             lib: {
                 src: paths.css.lib.to_min,
@@ -315,7 +315,7 @@ module.exports = function(grunt) {
 
         'http-server': {
             devBackground: {
-                root: dist_path.root,
+                root: build_path.root,
                 port: 8000,
                 host: "127.0.0.1",
                 showDir : true,
@@ -323,7 +323,7 @@ module.exports = function(grunt) {
                 runInBackground: true
             },
             dev: {
-                root: dist_path.root,
+                root: build_path.root,
                 port: 8000,
                 host: "127.0.0.1",
                 showDir : true,
@@ -398,7 +398,7 @@ module.exports = function(grunt) {
     grunt.registerTask('build:debug:sources', ['build:debug:sources:lib', 'build:debug:sources:app']);
 
     grunt.registerTask('build:debug:styles:lib', ['concat:libCSS']);
-    grunt.registerTask('build:debug:styles:app', ['sass:dist', 'autoprefixer:appCSS']);
+    grunt.registerTask('build:debug:styles:app', ['sass:build', 'autoprefixer:appCSS']);
     grunt.registerTask('build:debug:styles:fonts', ['copy:fonts']);
     grunt.registerTask('build:debug:styles', ['build:debug:styles:lib', 'build:debug:styles:app', 'build:debug:styles:fonts']);
 
@@ -412,7 +412,7 @@ module.exports = function(grunt) {
     grunt.registerTask('build:production:sources', ['build:production:sources:lib', 'build:production:sources:app']);
 
     grunt.registerTask('build:production:styles:lib', ['cssmin:lib', 'concat:libCSSMin']);
-    grunt.registerTask('build:production:styles:app', ['sass:dist', 'autoprefixer:appCSS', 'cssmin:app']);
+    grunt.registerTask('build:production:styles:app', ['sass:build', 'autoprefixer:appCSS', 'cssmin:app']);
     grunt.registerTask('build:production:styles:fonts', ['copy:fonts']);
     grunt.registerTask('build:production:styles', ['build:production:styles:lib', 'build:production:styles:app', 'build:production:styles:fonts']);
 
