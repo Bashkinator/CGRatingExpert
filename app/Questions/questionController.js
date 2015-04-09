@@ -43,7 +43,7 @@ questionController.controller('questionController', function($scope, $modal, Que
     $scope.$watch('QuestionService.answer', function(newAnswer) {
         if (newAnswer) {
             $modal.open({
-                templateUrl: '/templates/answer-tpl.html',
+                templateUrl: 'templates/answer-tpl.html',
                 controller: 'answerModalController',
                 resolve: {
                     answer: function () {

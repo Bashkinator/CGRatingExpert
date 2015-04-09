@@ -36,9 +36,7 @@ module.exports = function(grunt) {
         },
         jade: {
             mainViews: [app_paths.mainView],
-            templates: [
-                app_paths.root + '/Answer-tpl/view/answer-tpl.jade'
-            ],
+            templates: [],
             all: [app_paths.root + '/**/*.jade']
         },
         js: {
